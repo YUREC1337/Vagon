@@ -1,0 +1,1 @@
+web: java -jar -Dserver.port=$PORT target/hm-2.0.0.jar
