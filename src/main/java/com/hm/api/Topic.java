@@ -7,6 +7,16 @@ import java.util.ArrayList;
  */
 public class Topic {
     private ArrayList<String> post = new ArrayList<>();
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private String name;
     public ArrayList<String> getPost() {
         return post;
     }
