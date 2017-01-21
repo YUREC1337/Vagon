@@ -20,7 +20,7 @@ public class forumApi {
         return ResponseEntity.ok(UserHolder.search(login, pass));
     }
     @RequestMapping("/createTopic")
-    public ResponseEntity createForum (@RequestParam("neme") String name){
+    public ResponseEntity createForum (@RequestParam("name") String name){
         Topic topic = new Topic();
         topic.setName(name);
         topics.add(topic);
