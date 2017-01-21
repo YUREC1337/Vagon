@@ -1,14 +1,16 @@
 package com.hm.api;
 
-/**
- * Created by User81 on 14.01.2017.
- */
 public class Post {
-    private String message;
-    private String userId;
 
-    public String getUserId() {
-        return userId;
+    private String message;
+    private String userLogin;
+
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(String userId) {
+        this.userLogin = userId;
     }
 
     public String getMessage() {
@@ -18,8 +20,5 @@ public class Post {
     public void setMessage(String message) {
         this.message = message;
     }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 }
+

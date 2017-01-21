@@ -11,9 +11,9 @@ public class UserHolder {
     static {
         users.add(new User("JohnDoe", "12345"));
         users.add(new User("admin","zxcvbn"));
-        users.add(new User("LoL","1337"));
+        users.add(new User("E","1337"));
         users.add(new User("Dibil","777"));
-        users.add(new User("Nikita","228"));
+        users.add(new User("Andrew","2252"));
     }
     public static User search(String login, String pass) {
         return
