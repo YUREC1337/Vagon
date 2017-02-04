@@ -1,10 +1,15 @@
 package com.hm.api;
 
+import com.google.gson.Gson;
+import org.bson.Document;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Set;
+
+import static com.hm.api.DB.db;
 
 
 @RestController
@@ -13,9 +18,20 @@ public class forumApi {
     public static HashMap<String, Topic> topics = new HashMap<>();
 
     @RequestMapping("/login")
-    public ResponseEntity login(@RequestParam("login") String login, @RequestParam("pass") String pass) {
-        return ResponseEntity.ok(UserHolder.search(login, pass));
+    public User login(@RequestParam("login") String login, @RequestParam("pass") String pass) {
+        User user = new Gson().fromJson(
+                db().getCollection("user")
+                        .find(Document.parse("{'login':'"+ login + " , 'pass':'" + pass + "'}"))
+                        .first()
+                        .toJson(),
+                User.class
+
+        );
+        return user;
     }
+
+
+
 
     @RequestMapping("/createTopic")
     public ResponseEntity createTopic(@RequestParam("name") String name) {
@@ -40,7 +56,7 @@ public class forumApi {
                                @RequestParam("text") String text,
                                @RequestParam("login") String login,
                                @RequestParam("pass") String pass) {
-        User user = UserHolder.search(login, pass);
+        User user = login (login, pass);
         if (user == null) {
             return ResponseEntity.status(403).body("WRONG PASSWORD");
         }
@@ -48,7 +64,7 @@ public class forumApi {
         post.setMessage(text);
         post.setUserLogin(user.getLogin());
         topics.get(name).getPost().add(post);
-        return ResponseEntity.ok(getTopic(name));
+        return getTopic(name);
     }
 }
 
